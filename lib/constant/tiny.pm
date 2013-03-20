@@ -123,7 +123,7 @@ The rationale behind this module is that recent versions of C<constant.pm>
 have a better support for Unicode names. However, this means loading
 full Unicode support (F<utf8_heavy.pl>) which consumes memory. In most
 cases, the difference is not problematic. But in some particular cases
-(embedded Perl, frequently forked programs a la CGI), the increased
+(embedded Perl, frequently forked programs I<E<agrave> la> CGI), the increased
 memory cost can become a concern. This is even more annoying if the
 program doesn't use Unicode at all and therefore pays the high price.
 
