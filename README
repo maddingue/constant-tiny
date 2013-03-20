@@ -1,0 +1,87 @@
+NAME
+
+    constant::tiny - Perl pragma to declare constants
+
+
+DESCRIPTION
+
+    This module is a lightweight version of Perl standard "constant.pm".
+    Here are the keys differences:
+
+    *   only works on Perl 5.10+ in order to simplify a good part of the
+        code
+
+    *   doesn't support Unicode name; please use the standard "constant.pm"
+        module if you need to create constants with Unicode names
+
+    *   stricter rules about valid names; standard "constant.pm" gives more
+        detailled diagnostics about why a given name is not valid
+
+    The rationale behind this module is that recent versions of
+    "constant.pm" have a better support for Unicode names. However, this
+    means loading full Unicode support (utf8_heavy.pl) which consumes
+    memory. In most cases, the difference is not problematic. But in some
+    particular cases (embedded Perl, frequently forked programs a la CGI),
+    the increased memory cost can become a concern. This is even more
+    annoying if the program doesn't use Unicode at all and therefore pays
+    the high price.
+
+    Hence this module, which provides a very simple solution, only requiring
+    you to add "use constant::tiny" before any declaration of constants.
+
+    Other than this, the usage is (nearly) exactly the same as with the
+    standard "constant.pm" module. For more details, please read constant.
+
+
+INSTALLATION
+
+    To install this module, run the following commands:
+
+        perl Makefile.PL
+        make
+        make test
+        make install
+
+    Alternatively, to install with Module::Build, you can use the
+    following commands:
+
+        perl Build.PL
+        ./Build
+        ./Build test
+        ./Build install
+
+
+SUPPORT
+
+    You can find documentation for this module with the perldoc command.
+
+        perldoc constant::tiny
+
+    You can also look for information at:
+
+    * Search CPAN
+        http://search.cpan.org/dist/constant-tiny/
+
+    * Meta CPAN
+        https://metacpan.org/module/constant::tiny
+
+    * RT: CPAN's request tracker (report bugs here)
+        https://rt.cpan.org/Public/Dist/Display.html?Name=constant-tiny>
+
+    * AnnoCPAN: Annotated CPAN documentation
+        http://annocpan.org/dist/constant-tiny
+
+    * CPAN Ratings
+        http://cpanratings.perl.org/d/constant-tiny
+
+
+AUTHOR
+
+    Sebastien Aperghis-Tramoni <sebastien at aperghis.net>
+
+
+LICENSE
+
+    This module is free software; you can redistribute it or modify it under
+    the same terms as Perl itself.
+
