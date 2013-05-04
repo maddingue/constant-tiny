@@ -7,6 +7,9 @@ package # hide from PAUSE
 use 5.010;
 use strict;
 
+
+$constant::VERSION = $constant::tiny::VERSION;
+
 my %forbidden = map +($_, 1), qw<
     BEGIN INIT CHECK END DESTROY AUTOLOAD UNITCHECK
     STDIN STDOUT STDERR ARGV ARGVOUT ENV INC SIG
