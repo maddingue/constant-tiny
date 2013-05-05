@@ -1,5 +1,6 @@
 #!./perl -T
 
+use constant::tiny;
 use warnings;
 use vars qw{ @warnings $fagwoosh $putt $kloong};
 BEGIN {				# ...and save 'em for later
@@ -9,10 +10,8 @@ END { @warnings && print STDERR join "\n- ", "accumulated warnings:", @warnings 
 
 
 use strict;
-use Test::More tests => 96;
+use Test::More tests => 95;
 my $TB = Test::More->builder;
-
-use_ok "constant::tiny";
 
 use constant PI		=> 4 * atan2 1, 1;
 
@@ -135,6 +134,8 @@ eval q{
 };
 like $@, qr/Invalid name '__DISALLOWED'/;
 
+SKIP: {
+skip ": %declared is not supported", 10;
 # Check on declared() and %declared. This sub should be EXACTLY the
 # same as the one quoted in the docs!
 sub declared ($) {
@@ -163,6 +164,7 @@ ok !$constant::declared{'main::PIE'};
 
 ok declared 'Other::IN_OTHER_PACK';
 ok $constant::declared{'Other::IN_OTHER_PACK'};
+}
 
 SKIP: {
 skip ": warnings are not supported", 18;
@@ -266,7 +268,8 @@ is THREE**3, SPIT->(@{+FAMILY}**3);
 # Allow name of digits/underscores only if it begins with underscore
 TODO: {
     local $TODO = "allow tolerable names";
-    use warnings FATAL => 'constant';
+    # constant::tiny does not register a warnings category
+    #use warnings FATAL => 'constant';
     eval q{
         use constant _1_2_3 => 'allowed';
     };
