@@ -1,4 +1,5 @@
 package constant::tiny;
+return 1 if $INC{"constant.pm"};
 $INC{"constant.pm"} = $INC{+__FILE__};
 $VERSION = "1.00";
 
@@ -28,7 +29,7 @@ my $normal_constant_name = qr/^[A-Za-z0-9_]+\z/;
 # be inlined as a constant, thereby avoiding further sub calling 
 # overhead.
 #
-sub import {
+*import = sub {
     my $class = shift;
     return unless @_;  # ignore "use constant;"
 
@@ -78,7 +79,7 @@ sub import {
     }
 
     mro::method_changed_in($pkg) if $flush_mro;
-}
+};
 
 
 q< IN CONSTANT TIME >
