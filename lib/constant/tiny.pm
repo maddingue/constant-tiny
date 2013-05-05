@@ -15,8 +15,7 @@ my %forbidden = map +($_, 1), qw<
     STDIN STDOUT STDERR ARGV ARGVOUT ENV INC SIG
 >;
 
-my $normal_constant_name = qr/^_?[^\W_0-9]\w*\z/;
-my $tolerable = qr/^[A-Za-z_]\w*\z/;
+my $normal_constant_name = qr/^[A-Za-z0-9_]+\z/;
 
 
 #
