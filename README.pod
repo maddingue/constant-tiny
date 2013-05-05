@@ -1,0 +1,133 @@
+=head1 NAME
+
+constant::tiny - Perl pragma to declare constants
+
+
+=head1 DESCRIPTION
+
+This module is a lightweight version of the Perl standard module
+C<constant.pm>. Here are the keys differences:
+
+=over
+
+=item *
+
+only works on Perl 5.10+ in order to simplify a good part of the code
+
+=item *
+
+doesn't support Unicode names; please use the standard C<constant.pm>
+module if you need to create constants with Unicode names
+
+=item *
+
+stricter rules about valid names, only allow names with alphanums
+(C<[a-zA-Z0-9]> and underscore (C<_>), allowing one optional leading
+underscore
+
+=back
+
+In order to simplify its usage, C<constant:tiny> uses the normal
+C<constant> API. The main advatange is that switching your code
+to C<constant::tiny> means simply adding it before the first
+C<use constant>. The disadvantage is that, obviously, both modules
+can't be used at the same time. If the normal C<constant> was
+loaded before C<constant::tiny>, the latter won't do anything,
+letting the normal C<constant> do the work.
+
+Other than this, the usage is (nearly) exactly the same as with the
+standard C<constant> module. For more details, please read L<constant>.
+
+
+=head2 Rationale
+
+The original reason to write this module was that, starting with
+version 1.24, C<constant> always loaded F<utf8_heavy.pl>, which
+consumes some memory. Usually, this is not problematic, but in
+some particular cases (embedded Perl, frequently forked programs
+I<E<agrave> la> CGI), the increased memory cost can become a concern.
+
+Therefore, this module was written as a alternative solution,
+with no support for Unicode names, so that programs working in
+memory constrained environments could have a better control.
+
+Funnily enough, the day C<constant::tiny> was released on CPAN
+(the code had been written two months earlier as a proof of
+concept), Brad Gilbert proposed a patch for C<constant> in order
+to delay loading F<utf8_heavy.pl> until necessary.
+
+Therefore C<constant::tiny> is less useful (which is good news),
+but can still address specific needs, if you want to restrict
+constant names to alphanums only.
+
+
+=head1 INSTALLATION
+
+To install this module, run the following commands:
+
+    perl Makefile.PL
+    make
+    make test
+    make install
+
+Alternatively, to install with Module::Build, you can use the
+following commands:
+
+    perl Build.PL
+    ./Build
+    ./Build test
+    ./Build install
+
+
+=head1 SUPPORT
+
+You can find documentation for this module with the perldoc command.
+
+    perldoc constant::tiny
+
+You can also look for information at:
+
+=over
+
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/constant-tiny/>
+
+=item * Meta CPAN
+
+L<https://metacpan.org/module/constant::tiny>
+
+=item * RT: CPAN's request tracker (report bugs here)
+
+L<https://rt.cpan.org/Public/Dist/Display.html?Name=constant-tiny>.
+
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/constant-tiny>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/d/constant-tiny>
+
+=back
+
+
+=head1 ACKNOWLEDGEMENTS
+
+This module is heavily based on C<constant.pm>, originaly written
+by Tom Phoenix, Casey West, Nicholas Clark, Zefram and many other
+folks from the Perl 5 Porters.
+
+
+=head1 AUTHOR
+
+SE<eacute>bastien Aperghis-Tramoni C<< <sebastien at aperghis.net> >>
+
+
+=head1 LICENSE
+
+This module is free software; you can redistribute it or modify it
+under the same terms as Perl itself.
+
+=cut
+
