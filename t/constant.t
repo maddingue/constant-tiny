@@ -107,9 +107,9 @@ shift @warnings;
 is @warnings, 0, "unexpected warning";
 
 my $curr_test = $TB->current_test;
-use constant CSCALAR	=> \"ok 35\n";
-use constant CHASH	=> { foo => "ok 36\n" };
-use constant CARRAY	=> [ undef, "ok 37\n" ];
+use constant CSCALAR	=> \"ok 34\n";
+use constant CHASH	=> { foo => "ok 35\n" };
+use constant CARRAY	=> [ undef, "ok 36\n" ];
 use constant CCODE	=> sub { "ok $_[0]\n" };
 
 my $output = $TB->output ;
