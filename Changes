@@ -1,5 +1,6 @@
 Revision history for constant-tiny
 
+1.01 - 2013.05.05 (SAPER)
   - Bugfix: Avoid "redefine" warning if constant.pm is already loaded.
   - Tests: Fix a mistake and skip the tests which are not relevant.
 

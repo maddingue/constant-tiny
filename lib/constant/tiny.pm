@@ -1,7 +1,7 @@
 package constant::tiny;
 return 1 if $INC{"constant.pm"};
 $INC{"constant.pm"} = $INC{+__FILE__};
-$VERSION = "1.00";
+$VERSION = "1.01";
 
 package # hide from PAUSE
         constant;
