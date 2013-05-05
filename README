@@ -5,32 +5,49 @@ NAME
 
 DESCRIPTION
 
-    This module is a lightweight version of Perl standard "constant.pm".
-    Here are the keys differences:
+    This module is a lightweight version of the Perl standard module
+    "constant.pm". Here are the keys differences:
 
     *   only works on Perl 5.10+ in order to simplify a good part of the
         code
 
-    *   doesn't support Unicode name; please use the standard "constant.pm"
+    *   doesn't support Unicode names; please use the standard "constant.pm"
         module if you need to create constants with Unicode names
 
-    *   stricter rules about valid names; standard "constant.pm" gives more
-        detailled diagnostics about why a given name is not valid
+    *   stricter rules about valid names, only allow names with alphanums
+        ("[a-zA-Z0-9]" and underscore ("_"), allowing one optional leading
+        underscore
 
-    The rationale behind this module is that recent versions of
-    "constant.pm" have a better support for Unicode names. However, this
-    means loading full Unicode support (utf8_heavy.pl) which consumes
-    memory. In most cases, the difference is not problematic. But in some
-    particular cases (embedded Perl, frequently forked programs a la CGI),
-    the increased memory cost can become a concern. This is even more
-    annoying if the program doesn't use Unicode at all and therefore pays
-    the high price.
-
-    Hence this module, which provides a very simple solution, only requiring
-    you to add "use constant::tiny" before any declaration of constants.
+    In order to simplify its usage, "constant:tiny" uses the normal
+    "constant" API. The main advatange is that switching your code to
+    "constant::tiny" means simply adding it before the first "use constant".
+    The disadvantage is that, obviously, both modules can't be used at the
+    same time. If the normal "constant" was loaded before "constant::tiny",
+    the latter won't do anything, letting the normal "constant" do the work.
 
     Other than this, the usage is (nearly) exactly the same as with the
-    standard "constant.pm" module. For more details, please read constant.
+    standard "constant" module. For more details, please read constant.
+
+  Rationale
+
+    The original reason to write this module was that, starting with version
+    1.24, "constant" always loaded utf8_heavy.pl, which consumes some
+    memory. Usually, this is not problematic, but in some particular cases
+    (embedded Perl, frequently forked programs a la CGI), the increased
+    memory cost can become a concern.
+
+    Therefore, this module was written as a alternative solution, with no
+    support for Unicode names, so that programs working in memory
+    constrained environments could have a better control.
+
+    Funnily enough, the day "constant::tiny" was released on CPAN (the code
+    had been written two months earlier as a proof of concept), Brad Gilbert
+    proposed a patch for "constant" in order to delay loading utf8_heavy.pl
+    until necessary.
+
+    Therefore "constant::tiny" is less useful (which is good news), but can
+    still address specific needs, if you want to restrict constant names to
+    alphanums only.
 
 
 INSTALLATION
@@ -73,6 +90,13 @@ SUPPORT
 
     * CPAN Ratings
         http://cpanratings.perl.org/d/constant-tiny
+
+
+ACKNOWLEDGEMENTS
+
+    This module is heavily based on "constant.pm", originaly written by Tom
+    Phoenix, Casey West, Nicholas Clark, Zefram and many other folks from
+    the Perl 5 Porters.
 
 
 AUTHOR
