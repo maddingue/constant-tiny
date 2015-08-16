@@ -121,7 +121,10 @@ print $output CCODE->($curr_test+4);
 $TB->current_test($curr_test+4);
 
 eval q{ CCODE->{foo} };
-ok scalar($@ =~ /^Constant is not a HASH/);
+ok scalar(grep $@ =~ $_,
+    qr/^Constant is not a HASH/,
+    qr/^Not a HASH reference/,
+);
 
 
 # Allow leading underscore
