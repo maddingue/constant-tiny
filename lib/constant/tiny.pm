@@ -68,7 +68,7 @@ my $normal_constant_name = qr/^_?[A-Za-z0-9][A-Za-z0-9_]+\z/;
                 $symtab->{$name} = \$scalar;
                 ++$flush_mro;
             } else {
-		my $scalar = $scalar;
+                my $scalar = $scalar;
                 *$full_name = sub () { $scalar };
             }
         } elsif (@_) {
